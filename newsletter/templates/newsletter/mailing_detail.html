@@ -1,0 +1,68 @@
+{% extends 'client/home.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-primary bg-opacity-10">
+                    <h3>Рассылка #{{ mailing.pk }}</h3>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-borderless mb-0">
+                        <tbody>
+                            <tr class="border-bottom">
+                                <th style="width: 150px; background-color: #f8f9fa;" class="p-3">Статус:</th>
+                                <td class="p-3">
+                                    <span class="badge
+                                        {% if mailing.status == 'created' %}bg-secondary
+                                        {% elif mailing.status == 'started' %}bg-success
+                                        {% elif mailing.status == 'finished' %}bg-danger
+                                        {% endif %}">
+                                        {{ mailing.get_status_display }}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th style="width: 150px; background-color: #f8f9fa;" class="p-3">Начало:</th>
+                                <td class="p-3">{{ mailing.start_time|date:"d.m.Y H:i" }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th style="width: 150px; background-color: #f8f9fa;" class="p-3">Конец:</th>
+                                <td class="p-3">{{ mailing.end_time|date:"d.m.Y H:i" }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th style="width: 150px; background-color: #f8f9fa;" class="p-3">Сообщение:</th>
+                                <td class="p-3">
+                                    <strong>{{ mailing.message.subject }}</strong>
+                                    <div class="mt-2 p-3 bg-light rounded">
+                                        {{ mailing.message.body|linebreaks }}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="width: 150px; background-color: #f8f9fa;" class="p-3">Получатели ({{ mailing.recipients.count }}):</th>
+                                <td class="p-3">
+                                    <ul class="list-unstyled mb-0">
+                                        {% for recipient in mailing.recipients.all %}
+                                        <li>{{ recipient.name }} &lt;{{ recipient.email }}&gt;</li>
+                                        {% empty %}
+                                        <li class="text-muted">Нет получателей</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+<div class="card-footer">
+    <a href="{% url 'newsletter:mailing_list' %}" class="btn btn-secondary">← Назад к списку</a>
+    <a href="{% url 'newsletter:mailing_update' mailing.pk %}" class="btn btn-primary">Редактировать</a>
+    <a href="{% url 'newsletter:mailing_send' mailing.pk %}" class="btn btn-success">Запустить</a>
+    <a href="{% url 'newsletter:mailing_delete' mailing.pk %}" class="btn btn-danger">Удалить</a>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

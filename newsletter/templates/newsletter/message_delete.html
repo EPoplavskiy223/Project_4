@@ -1,0 +1,26 @@
+{% extends 'client/home.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary bg-opacity-10 border-bottom border-secondary border-opacity-25">
+                    <h3 class="mb-0">Удалить сообщение?</h3>
+                </div>
+                <div class="card-body">
+                    <p class="lead mb-0">Вы уверены, что хотите удалить сообщение:</p>
+                    <p class="fw-bold mt-2 mb-0">"{{ message.subject }}"</p>
+                </div>
+                <div class="card-footer bg-transparent border-top border-secondary border-opacity-25">
+                    <form method="post" class="d-flex justify-content-end gap-2">
+                        {% csrf_token %}
+                        <a href="{% url 'newsletter:message_list' %}" class="btn btn-secondary">Отмена</a>
+                        <button type="submit" class="btn btn-danger">Да, удалить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
