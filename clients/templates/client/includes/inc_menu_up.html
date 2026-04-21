@@ -1,0 +1,58 @@
+<header class="sticky-top">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom box-shadow" style="background-color: #e9ecef;">
+        <div class="me-auto d-flex align-items-center gap-2">
+            <div class="dropdown">
+
+                <button class="btn btn-md dropdown-toggle px-3 py-2" style="background-color: #6c8ebf; color: white; border-color: #5a7a9e; border-radius: 8px; font-weight: 500;" type="button" id="clientsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Клиенты
+                </button>
+                <ul class="dropdown-menu shadow-sm rounded-3 mt-2" aria-labelledby="clientsDropdown" style="min-width: 200px; background-color: #f8f9fa; border: 1px solid #dee2e6;">
+                    <li><a class="dropdown-item py-2 px-3 rounded-2" href="{% url 'clients:client_list' %}" style="color: #333;">Список клиентов</a></li>
+                    <li><hr class="dropdown-divider my-1"></li>
+                    <li><a class="dropdown-item py-2 px-3 rounded-2" href="{% url 'clients:client_create' %}" style="color: #333;">Добавить клиента</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <button class="btn btn-md dropdown-toggle px-3 py-2" style="background-color: #6c8ebf; color: white; border-color: #5a7a9e; border-radius: 8px; font-weight: 500;" type="button" id="messagesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Письма
+                </button>
+                <ul class="dropdown-menu shadow-sm rounded-3 mt-2" aria-labelledby="messagesDropdown" style="min-width: 200px; background-color: #f8f9fa; border: 1px solid #dee2e6;">
+                    <li><a class="dropdown-item py-2 px-3 rounded-2" href="{% url 'newsletter:message_list' %}" style="color: #333;">Список писем</a></li>
+                    <li><hr class="dropdown-divider my-1"></li>
+                    <li><a class="dropdown-item py-2 px-3 rounded-2" href="{% url 'newsletter:mailing_list' %}" style="color: #333;">Список рассылок</a></li>
+                    <li><hr class="dropdown-divider my-1"></li>
+                    <li><a class="dropdown-item py-2 px-3 rounded-2" href="{% url 'newsletter:message_create' %}" style="color: #333;">Добавить сообщение</a></li>
+                    <li><hr class="dropdown-divider my-1"></li>
+                    <li><a class="dropdown-item py-2 px-3 rounded-2" href="{% url 'newsletter:mailing_create' %}" style="color: #333;">Добавить рассылку</a></li>
+                    <li><hr class="dropdown-divider my-1"></li>
+                    <li><a class="dropdown-item py-2 px-3 rounded-2" href="{% url 'newsletter:attempt_list' %}" style="color: #333;">История попыток</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="position-absolute start-50 translate-middle-x">
+            <h2 class="display-5 text-dark opacity-25 mb-0 fw-bold">MailFlow</h2>
+        </div>
+
+        <div class="ms-auto d-flex align-items-center gap-3">
+            <div class="d-flex gap-3 me-2" style="background-color: rgba(255,255,255,0.4); padding: 6px 15px; border-radius: 30px;">
+                <div class="text-center">
+                    <small class="text-muted d-block" style="font-size: 0.7rem;">Всего</small>
+                    <span class="fw-bold">{{ total_mailings }}</span>
+                </div>
+                <div class="text-center">
+                    <small class="text-muted d-block" style="font-size: 0.7rem;">Активных</small>
+                    <span class="fw-bold text-success">{{ active_mailings }}</span>
+                </div>
+                <div class="text-center">
+                    <small class="text-muted d-block" style="font-size: 0.7rem;">Клиентов</small>
+                    <span class="fw-bold">{{ unique_clients }}</span>
+                </div>
+            </div>
+
+            <div>
+            </div>
+        </div>
+    </div>
+</header>

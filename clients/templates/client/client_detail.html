@@ -1,0 +1,38 @@
+{% extends 'client/home.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary bg-opacity-10">
+                    <h3 class="mb-0">{{ client.name }}</h3>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-borderless mb-0">
+                        <tbody>
+                            <tr class="border-bottom">
+                                <th style="width: 150px; background-color: #f8f9fa;" class="p-3">Email:</th>
+                                <td class="p-3">{{ client.email }}</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <th style="background-color: #f8f9fa;" class="p-3">Комментарий:</th>
+                                <td class="p-3">{{ client.comment|default:"—" }}</td>
+                            </tr>
+                            <tr>
+                                <th style="background-color: #f8f9fa;" class="p-3">Дата создания:</th>
+                                <td class="p-3">{{ client.created_at|date:"d.m.Y H:i" }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <a href="{% url 'clients:client_list' %}" class="btn btn-secondary">← Назад к списку</a>
+                    <a href="{% url 'clients:client_update' client.pk %}" class="btn btn-primary">Редактировать</a>
+                    <a href="{% url 'clients:client_delete' client.pk %}" class="btn btn-danger">Удалить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

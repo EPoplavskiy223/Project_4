@@ -1,0 +1,41 @@
+{% extends 'client/home.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Сообщения</h1>
+        <a href="{% url 'newsletter:message_create' %}" class="btn btn-primary">Добавить сообщение</a>
+    </div>
+
+    {% if message_list %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="table-secondary">
+                <tr>
+                    <th>Тема письма</th>
+                    <th>Тело письма</th>
+                    <th style="width: 130px; padding-left: 20px;">Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for message in message_list %}
+                <tr>
+                    <td>{{ message.subject }}</td>
+                    <td>{{ message.body|truncatechars:50|default:"—" }}</td>
+                    <td style="padding-left: 20px; white-space: nowrap;">
+                        <a href="{% url 'newsletter:message_detail' message.pk %}" class="btn btn-sm btn-outline-primary">Просмотр</a>
+                        <a href="{% url 'newsletter:message_update' message.pk %}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                        <a href="{% url 'newsletter:message_delete' message.pk %}" class="btn btn-sm btn-outline-danger">Удалить</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        Сообщений пока нет. <a href="{% url 'newsletter:message_create' %}" class="alert-link">Добавить первое сообщение</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

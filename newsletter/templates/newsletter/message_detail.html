@@ -1,0 +1,30 @@
+{% extends 'client/home.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header bg-primary bg-opacity-10">
+                    <h3>{{ message.subject }}</h3>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-borderless mb-0">
+                        <tbody>
+                            <tr class="border-bottom">
+                                <th style="width: 150px; background-color: #f8f9fa;" class="p-3">Тема письма:</th>
+                                <td class="p-3">{{ message.body|linebreaks }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'newsletter:message_list' %}" class="btn btn-secondary">← Назад к списку</a>
+                    <a href="{% url 'newsletter:message_update' message.pk %}" class="btn btn-primary">Редактировать</a>
+                    <a href="{% url 'newsletter:message_delete' message.pk %}" class="btn btn-danger">Удалить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
